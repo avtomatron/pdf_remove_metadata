@@ -1,0 +1,19 @@
+# licensed CC BY 4.0 by Avtomatron
+
+import re
+import sys
+droppedFile = sys.argv[1]
+out=droppedFile.split('.')[0]+"-new."+droppedFile.split('.')[1]
+
+file=droppedFile
+with open(file,mode='rb') as file:
+    filecontent = file.read()
+
+print(len(filecontent))
+content_new = re.sub(b'\d+\s0\sobj.<</Length\s\d+/Subtype/XML/Type/Metadata.*?endobj', b'', filecontent, flags = re.M|re.S )
+
+print (len(content_new))
+
+output_file = open(out,"wb")
+output_file.write(content_new)
+output_file.close()
